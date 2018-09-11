@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{attachfile}
+\usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+}
+\begin{document}
+
+\begin{lstlisting}
+###Question 1:
+####Consider the probability density function p(x) =(c/x^4) for x>=1,where c is a constant. Generate 100 random samples from this distribution and plot a histogram. How close is the average of the samples to the expected value of X?
+### Answer 1:
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r equation1, echo=FALSE}
+x=runif(100,min=0,max=1)
+a=floor(1/x)
+p=3/(a**2)
+```
+
+```{r graph1 , echo=FALSE}
+b=hist(p,main = "Histogram of Samples",xlab = "Value of Samples")
+#plot(b)
+```
+
+```{r average1,echo=FALSE}
+avg=mean(p)
+```
+
+```{r expected1 value, echo =FALSE}
+f=function(a){
+  3/a**3
+}
+c=integrate(f,1,Inf)
+```
+Average value of samples is
+```{r print avg1, echo=FALSE}
+print(avg)
+```
+Expected value of X is
+```{r print expected1, echo=FALSE}
+print(c)
+```
+
+\end{lstlisting}
+
+\attachfile {Assignment1.Rmd}
+\end{document}

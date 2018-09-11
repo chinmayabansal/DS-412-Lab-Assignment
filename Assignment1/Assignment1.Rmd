@@ -9,8 +9,8 @@ output:
   html_document:
     df_print: paged
   word_document: default
-  includes:
-    in_header: check1.sty
+  
+
 ---
 ###Question 1:
 ####Consider the probability density function p(x) =(c/x^4) for x>=1,where c is a constant. Generate 100 random samples from this distribution and plot a histogram. How close is the average of the samples to the expected value of X?
@@ -174,4 +174,7 @@ scaling(d,k)
 ```{r 10dim,echo = FALSE}
 k = 10
 scaling(d,k)
+```
+
+```{r attach7, echo=FALSE}
 ```

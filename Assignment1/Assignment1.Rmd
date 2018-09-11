@@ -178,3 +178,8 @@ scaling(d,k)
 
 ```{r attach7, echo=FALSE}
 ```
+
+```{r}
+library(shiny)
+runExample("08_html")
+```

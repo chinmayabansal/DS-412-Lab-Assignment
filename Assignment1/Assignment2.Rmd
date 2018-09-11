@@ -1,0 +1,19 @@
+---
+title: "Assignment 2"
+author: "Chinmaya Bansal"
+date: "5 September 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r work, echo=FALSE}
+x=(1:20)
+y=(pi^(x/2))/(gamma((x/2)+1))
+```
+
+```{r plot,echo=FALSE}
+plot(x,y,ylab = "Volume", xlab = "Number of dimensions",type = "b",main = "Volume of d-dimensional unit ball")
+```

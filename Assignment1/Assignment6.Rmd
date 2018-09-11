@@ -1,0 +1,64 @@
+---
+title: "Assignment 6"
+author: "Chinmaya Bansal"
+date: "5 September 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r sphere, echo = FALSE}
+library(hitandrun)
+
+sample <- hypersphere.sample(900, 20)       #Generating 20 Random points
+fin_sample <- 30*sample                     #Radius to 30
+```
+
+```{r distance, echo = FALSE}
+d <- dist(fin_sample,method = "euclidean")  #Distance between points
+```
+
+```{r function, echo = FALSE}
+  scaling <- function(d,ndim){              #Scaling to n-deimension
+  fit <- cmdscale(d, eig = FALSE, k = ndim) #Classical Multidimensional Scaling
+  d_new <- dist(fit)                        #Calculating new distances  
+  diff <- (((k^0.5)*d) - d_new)             #Calculating the differnce
+  print(paste("Subspace of dimension:",k))
+  print(max(diff))
+}
+```
+
+The differences in euclidean distances for the subspace projection is as follows:
+```{r 1dim,echo = FALSE}
+k = 1
+scaling(d,k)
+```
+
+```{r 2dim,echo = FALSE}
+k = 2
+scaling(d,k)
+```
+
+```{r 3dim,echo = FALSE}
+k = 3
+scaling(d,k)
+```
+
+```{r 4dim,echo = FALSE}
+k = 4
+scaling(d,k)
+```
+
+```{r 5dim,echo = FALSE}
+k = 5
+scaling(d,k)
+```
+
+```{r 10dim,echo = FALSE}
+k = 10
+scaling(d,k)
+```

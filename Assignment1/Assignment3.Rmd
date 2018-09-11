@@ -1,0 +1,16 @@
+---
+title: "Assignment 3"
+author: "Chinmaya Bansal"
+date: "5 September 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r code , echo=FALSE}
+x=(1:20)
+y=(2*pi^((x+1)/2))/(gamma((x+1)/2))
+plot(x,y,ylab = "Surface Area", xlab = "Number of dimensions",type = "b", main = "Surface Area of d-dimensional unit ball")
+```

@@ -1,0 +1,22 @@
+---
+title: "Assignment 5"
+author: "Chinmaya Bansal"
+date: "5 September 2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup5, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r work5, echo=FALSE}
+x=(1:10)#dimension
+y=(1:10)#radius
+z=function(x,y){(2*(pi^((x+1)/2))*(y**x))/(gamma((x+1)/2))}
+```
+
+```{r plot5,echo=FALSE}
+z=outer(x,y,z)
+persp(x,y,z,xlab = "Number of Dimensions - X Axis",ylab = "Radius - Y Axis", zlab = "Surface Area of Sphere - Z Axis",main = "Plot of Surface Area ", theta = 30,col = "green",phi=0,expand = 0.5)
+```

@@ -1,0 +1,177 @@
+---
+title: "Assignment 1"
+author: "Chinmaya Kumar Bansal"
+date: "4 September 2018"
+header-includes:
+   - \usepackage{bbm}
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+  includes:
+    in_header: check1.sty
+---
+###Question 1:
+####Consider the probability density function p(x) =(c/x^4) for x>=1,where c is a constant. Generate 100 random samples from this distribution and plot a histogram. How close is the average of the samples to the expected value of X?
+### Answer 1:
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r equation1, echo=FALSE}
+x=runif(100,min=0,max=1)
+a=floor(1/x)
+p=3/(a**2)
+```
+
+```{r graph1 , echo=FALSE}
+b=hist(p,main = "Histogram of Samples",xlab = "Value of Samples")
+#plot(b)
+```
+
+```{r average1,echo=FALSE}
+avg=mean(p)
+```
+
+```{r expected1 value, echo =FALSE}
+f=function(a){
+  3/a**3
+}
+c=integrate(f,1,Inf)
+```
+Average value of samples is
+```{r print avg1, echo=FALSE}
+print(avg)
+```
+Expected value of X is
+```{r print expected1, echo=FALSE}
+print(c)
+```
+
+
+\pagebreak
+
+
+###Question 2:
+####Draw a 2-D plot in which the Y-axis represents V(d), the volume of a d-dimensional unit ball, and the X-axis represents d= 1,2,3, . . .. State your observations
+### Answer 2:
+
+```{r work2, echo=FALSE}
+x=(1:20)
+y=(pi^(x/2))/(gamma((x/2)+1))
+```
+
+```{r plot2,echo=FALSE}
+plot(x,y,ylab = "Volume", xlab = "Number of dimensions",type = "b",main = "Volume of d-dimensional unit ball")
+```
+\pagebreak
+
+###Question 3:
+####Draw a 2-D plot in which the Y-axis represents S(d), the surface area of a d-dimensional unit ball, and the X-axis represents d= 1,2,3, . . .. State your observations.
+
+###Anser 3:
+
+```{r code3 , echo=FALSE}
+x=(1:20)
+y=(2*pi^((x+1)/2))/(gamma((x+1)/2))
+plot(x,y,ylab = "Surface Area", xlab = "Number of dimensions",type = "b", main = "Surface Area of d-dimensional unit ball")
+```
+
+\pagebreak
+
+###Question 4:
+
+####Draw a 3-D plot in which the Z-axis represents V(d), the volume of a d-dimensional ball of radius R, and the X-axis represents d, and the Y-axis represents the radius R. State your observations.
+
+###Answer 4:
+```{r work4, echo=FALSE}
+x=(1:10)#dimension
+y=(1:10)#radius
+z=function(x,y){((pi^(x/2))*(y**x))/(gamma((x/2)+1))}
+```
+
+```{r plot4,echo=FALSE}
+z=outer(x,y,z)
+persp(x,y,z,xlab = "Number of Dimensions - X Axis",ylab = "Radius - Y Axis", zlab = "Volume of Sphere - Z Axis",main = "Plot of Volume ", theta = 30,col = "green",phi=0,expand = 0.5)
+```
+
+\pagebreak
+
+###Question 5:
+
+####Draw a 3-D plot in which the Z-axis represents S(d), the surface area of a d-dimensional ball of radius R, and the X -axis represents d, and the Y-axis represents the radius R. State your observations.
+###Answer 5:
+```{r work5, echo=FALSE}
+x=(1:10)#dimension
+y=(1:10)#radius
+z=function(x,y){(2*(pi^((x+1)/2))*(y**x))/(gamma((x+1)/2))}
+```
+
+```{r plot5,echo=FALSE}
+z=outer(x,y,z)
+persp(x,y,z,xlab = "Number of Dimensions - X Axis",ylab = "Radius - Y Axis", zlab = "Surface Area of Sphere - Z Axis",main = "Plot of Surface Area ", theta = 30,col = "green",phi=0,expand = 0.5)
+```
+
+
+
+\pagebreak
+
+###Question 6:
+####Generate 20 points uniformly at random on a 900 -dimensional sphere of radius 30. Calculate the distance between each pair of points. Then, select a method of projection and project the data onto subspaces of dimension k = 100, 50,10,5,4,3,2,1 and calculate the difference between k^(1/2) times the original distances and the new pair-wise distances. For each value of k what is the maximum difference as a percent of k^(1/2).
+
+###Answer 6: 
+
+```{r sphere6, echo = FALSE}
+library(hitandrun)
+
+sample <- hypersphere.sample(900, 20)       #Generating 20 Random points
+fin_sample <- 30*sample                     #Radius to 30
+```
+
+```{r distance6, echo = FALSE}
+d <- dist(fin_sample,method = "euclidean")  #Distance between points
+```
+
+```{r function6, echo = FALSE}
+  scaling <- function(d,ndim){              #Scaling to n-deimension
+  fit <- cmdscale(d, eig = FALSE, k = ndim) #Classical Multidimensional Scaling
+  d_new <- dist(fit)                        #Calculating new distances  
+  diff <- (((k^0.5)*d) - d_new)             #Calculating the differnce
+  print(paste("Subspace of dimension:",k))
+  print(max(diff))
+}
+```
+
+The differences in euclidean distances for the subspace projection is as follows:
+```{r 1dim,echo = FALSE}
+k = 1
+scaling(d,k)
+```
+
+```{r 2dim,echo = FALSE}
+k = 2
+scaling(d,k)
+```
+
+```{r 3dim,echo = FALSE}
+k = 3
+scaling(d,k)
+```
+
+```{r 4dim,echo = FALSE}
+k = 4
+scaling(d,k)
+```
+
+```{r 5dim,echo = FALSE}
+k = 5
+scaling(d,k)
+```
+
+```{r 10dim,echo = FALSE}
+k = 10
+scaling(d,k)
+```

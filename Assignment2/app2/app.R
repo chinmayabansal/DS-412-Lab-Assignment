@@ -117,17 +117,17 @@ server <- function(input, output) {
     if( is.null(input$plot_brush$xmax) && is.null(input$plot_hover$x)) 
       color="blue"
     else if(!is.null(input$plot_hover$x))
-    {
+     {
       color=dkkb2()
-    }
+      }
     else if( !is.null(input$plot_brush$xmax) && is.null(input$plot_hover$x)) 
-    {
+          {
       color=dkkb()
-    }
-    
+          }
+
     else color=dkkb()
     #observeEvent(input$plot_hover, color=dkkb2())
-    
+      
   })
   
   dkkb<-reactive({
@@ -173,7 +173,7 @@ server <- function(input, output) {
     abcc=(as.integer((input$plot_hover$x-  min(d()))*10  / (max(d())-min(d()) ))+1)
     color[[abcc]]="orange"
     print(color)
-  })
+    })
   output$distPlot <- renderMetricsgraphics({
     dist <- input$dist
     n <- input$n
